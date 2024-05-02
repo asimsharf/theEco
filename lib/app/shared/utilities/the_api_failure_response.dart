@@ -30,6 +30,9 @@ class TheApiFailureResponse {
 
   @override
   String toString() {
-    return 'TheApiFailureResponse{message: $message, code: $code, status: $status}';
+    return String.fromCharCodes(
+      toJson().entries.expand((e) => '$e'.codeUnits).toList(),
+    );
+    // return 'TheApiFailureResponse{message: $message, code: $code, status: $status}';
   }
 }

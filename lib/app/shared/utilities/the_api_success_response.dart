@@ -34,6 +34,9 @@ class TheApiSuccessResponse<T> {
 
   @override
   String toString() {
-    return 'TheApiSuccessResponse{data: $data, message: $message, code: $code, status: $status}';
+    return String.fromCharCodes(
+      toJson().entries.expand((e) => '$e'.codeUnits).toList(),
+    );
+    // return 'TheApiSuccessResponse{data: $data, message: $message, code: $code, status: $status}';
   }
 }
