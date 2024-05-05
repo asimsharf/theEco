@@ -57,6 +57,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.4.3+1"
+  either_dart:
+    dependency: "direct main"
+    description:
+      name: either_dart
+      sha256: "0b57f6a9410ce0ba2cc340220109f545bf4bad1b06b242219f0af11ab9e84f0e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   fake_async:
     dependency: transitive
     description:
@@ -163,6 +171,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.0"
+  pretty_json:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: d641c951bda79cc32db4ee1823bf48c09483a9bf
+      url: "https://github.com/asimsharf/pretty_json.git"
+    source: git
+    version: "0.0.1"
   shimmer:
     dependency: "direct main"
     description:
@@ -249,5 +266,5 @@ packages:
     source: hosted
     version: "13.0.0"
 sdks:
-  dart: ">=3.3.0 <4.0.0"
+  dart: ">=3.3.4 <4.0.0"
   flutter: ">=3.13.0"

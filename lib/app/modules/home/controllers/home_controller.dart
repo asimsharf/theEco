@@ -1,10 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:theeco/app/modules/home/repository/HomeRepository.dart';
+import 'package:theeco/app/modules/home/repository/HomeRepositoryImpl.dart';
 
 import '../providers/home_provider.dart';
 import '../todos_model.dart';
 
 class HomeController extends GetxController {
+  late HomeRepository repository;
+
+  HomeController({HomeRepository? repository}) {
+    this.repository = repository ?? HomeRepositoryImpl();
+  }
+
+  Future<void> getHomeData() async {
+    try {
+      final response = await repository.getHomeData();
+      if (response.isEmpty) {
+        Get.snackbar(
+          'Error',
+          'Failed to load data',
+          snackPosition: SnackPosition.TOP,
+        );
+      } else {
+        todos.assignAll(response);
+      }
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        'Failed to load data',
+        snackPosition: SnackPosition.TOP,
+      );
+    }
+  }
+
   final RxBool isLoading = true.obs;
   final todos = List<TodosModel>.empty(growable: true).obs;
 
@@ -14,7 +43,6 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-
     fetchData();
   }
 

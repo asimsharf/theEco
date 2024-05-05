@@ -43,6 +43,14 @@ class TodosModel {
     );
   }
 
+  static List<TodosModel> fromJsonList(data) {
+    List<TodosModel> todosList = [];
+    for (var item in data) {
+      todosList.add(TodosModel.fromJson(item));
+    }
+    return todosList;
+  }
+
   @override
   String toString() {
     return 'TodosModel(userId: $userId, id: $id, title: $title, completed: $completed)';
