@@ -1,13 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:either_dart/either.dart';
-import 'package:theeco/app/modules/home/services/HomeService.dart';
 import 'package:theeco/app/modules/home/todos_model.dart';
 import 'package:theeco/app/shared/errors/failure.dart';
 
-class HomeServiceImpl implements HomeService {
+import '../interfaces/homeInterface.dart';
+
+class HomeServiceImplementation implements HomeInterface {
   final Dio dio;
 
-  HomeServiceImpl(this.dio);
+  HomeServiceImplementation(this.dio);
 
   static const String _baseUrl = 'https://jsonplaceholder.typicode.com/todos';
 
@@ -87,5 +88,11 @@ class HomeServiceImpl implements HomeService {
         ),
       );
     }
+  }
+
+  @override
+  Future<bool> getHomeDataThree() {
+    // TODO: implement getHomeDataThree
+    throw UnimplementedError();
   }
 }

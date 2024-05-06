@@ -1,34 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:theeco/app/modules/home/repository/HomeRepository.dart';
-import 'package:theeco/app/modules/home/repository/HomeRepositoryImpl.dart';
 
 import '../providers/home_provider.dart';
+import '../providers/interfaces/homeInterface.dart';
+import '../providers/repositories/HomeRepositoryImplementation.dart';
 import '../todos_model.dart';
 
 class HomeController extends GetxController {
-  late HomeRepository repository;
+  late HomeInterface repository;
 
-  HomeController({HomeRepository? repository}) {
-    this.repository = repository ?? HomeRepositoryImpl();
+  HomeController({HomeInterface? repository}) {
+    this.repository = repository ?? HomeRepositoryImplementation();
   }
 
   Future<void> getHomeData() async {
     try {
+      isLoading.value = true;
       final response = await repository.getHomeData();
       if (response.isEmpty) {
         Get.snackbar(
           'Error',
-          'Failed to load data',
+          'Failed to load data from server',
           snackPosition: SnackPosition.TOP,
         );
       } else {
         todos.assignAll(response);
+        isLoading.value = false;
       }
     } catch (e) {
       Get.snackbar(
         'Error',
-        'Failed to load data',
+        'Failed to load data from server',
         snackPosition: SnackPosition.TOP,
       );
     }
@@ -44,6 +46,7 @@ class HomeController extends GetxController {
   void onInit() {
     super.onInit();
     fetchData();
+    getHomeData();
   }
 
   @override
@@ -53,12 +56,14 @@ class HomeController extends GetxController {
       if (scrollController.position.pixels ==
           scrollController.position.maxScrollExtent) {
         fetchData();
+        getHomeData();
       }
 
       // scroll pull to refresh
       if (scrollController.position.pixels ==
           scrollController.position.minScrollExtent) {
         fetchData();
+        getHomeData();
       }
     });
   }
