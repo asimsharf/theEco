@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
 class TheDio {
   /// Singleton
@@ -10,7 +13,7 @@ class TheDio {
   final String baseUrl = 'https://jsonplaceholder.typicode.com';
 
   // Headers
-  void dioHeaders() {
+  Future<void> dioHeaders() async {
     dio.options.headers['Content-Type'] = 'application/json';
     dio.options.headers['Accept'] = 'application/json';
     dio.options.headers['Authorization'] = 'Bearer token';
@@ -19,23 +22,34 @@ class TheDio {
   }
 
   // Interceptors
-  void dioInterceptors() {
+  Future<void> dioInterceptors() async {
     dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) {
-          print('REQUEST[${options.method}] => PATH: ${options.path}');
+          if (kDebugMode) {
+            log(
+              '[${options.method}] => PATH: ${options.path}',
+              name: "TheDio REQUEST ",
+            );
+          }
           return handler.next(options);
         },
         onResponse: (response, handler) {
-          print(
-            'RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}',
-          );
+          if (kDebugMode) {
+            log(
+              '[${response.statusCode}] => PATH: ${response.requestOptions.path}',
+              name: "TheDio RESPONSE",
+            );
+          }
           return handler.next(response);
         },
         onError: (DioException ex, handler) {
-          print(
-            'ERROR[${ex.response?.statusCode}] => PATH: ${ex.requestOptions.path}',
-          );
+          if (kDebugMode) {
+            log(
+              '[${ex.response?.statusCode}] => PATH: ${ex.requestOptions.path}',
+              name: "TheDio ERROR",
+            );
+          }
           return handler.next(ex);
         },
       ),

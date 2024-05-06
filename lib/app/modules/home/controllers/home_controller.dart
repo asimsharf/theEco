@@ -1,22 +1,38 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:theeco/app/modules/home/todo_request_model.dart';
+import 'package:theeco/app/shared/utilities/the_dio.dart';
 
-import '../providers/home_provider.dart';
-import '../providers/interfaces/homeInterface.dart';
-import '../providers/repositories/HomeRepositoryImplementation.dart';
+import '../interfaces/homeInterface.dart';
+import '../services/HomeService.dart';
 import '../todos_model.dart';
 
 class HomeController extends GetxController {
-  late HomeInterface repository;
+  HomeInterface homeInterface;
 
-  HomeController({HomeInterface? repository}) {
-    this.repository = repository ?? HomeRepositoryImplementation();
+  HomeController({required this.homeInterface}) {
+    homeInterface = HomeService();
+  }
+
+  final RxBool isLoading = true.obs;
+  final todos = List<TodosModel>.empty(growable: true).obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    TheDio.instance.dioHeaders();
+    TheDio.instance.dioInterceptors();
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
+    getHomeData();
   }
 
   Future<void> getHomeData() async {
     try {
       isLoading.value = true;
-      final response = await repository.getHomeData();
+      final response = await homeInterface.getHomeData();
       if (response.isEmpty) {
         Get.snackbar(
           'Error',
@@ -36,59 +52,60 @@ class HomeController extends GetxController {
     }
   }
 
-  final RxBool isLoading = true.obs;
-  final todos = List<TodosModel>.empty(growable: true).obs;
-
-  //  scrollController
-  final scrollController = ScrollController();
-
-  @override
-  void onInit() {
-    super.onInit();
-    fetchData();
-    getHomeData();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-    scrollController.addListener(() {
-      if (scrollController.position.pixels ==
-          scrollController.position.maxScrollExtent) {
-        fetchData();
-        getHomeData();
-      }
-
-      // scroll pull to refresh
-      if (scrollController.position.pixels ==
-          scrollController.position.minScrollExtent) {
-        fetchData();
-        getHomeData();
-      }
-    });
-  }
-
-  fetchData() async {
-    isLoading.value = true;
-    await HomeProvider().fetchData().then((response) {
-      if (response.status) {
-        todos.clear();
-        todos.assignAll(response.data);
-        isLoading.value = false;
-      } else {
+  Future<void> getHomeDataTow() async {
+    try {
+      isLoading.value = true;
+      final response = await homeInterface.getHomeDataTow();
+      if (response.isLeft) {
         Get.snackbar(
           'Error',
-          response.message,
+          response.left.message,
           snackPosition: SnackPosition.TOP,
         );
+      } else {
+        todos.assignAll(response.right);
+        isLoading.value = false;
       }
-    });
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        'Failed to load data from server',
+        snackPosition: SnackPosition.TOP,
+      );
+    }
+  }
+
+  Future<void> postHomeData(TodoRequestModel todos) async {
+    try {
+      isLoading.value = true;
+      final response = await homeInterface.postHomeData(todos);
+      if (response.isLeft) {
+        Get.snackbar(
+          'Error',
+          response.left.message,
+          snackPosition: SnackPosition.TOP,
+        );
+      } else {
+        this.todos.add(response.right);
+        Get.snackbar(
+          'Success',
+          'Todo added successfully',
+          snackPosition: SnackPosition.TOP,
+        );
+        isLoading.value = false;
+      }
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        'Failed to load data from server $e',
+        snackPosition: SnackPosition.TOP,
+      );
+    }
   }
 
   updateTodo(TodosModel copyWith) {
     final index = todos.indexWhere((element) => element.id == copyWith.id);
     todos[index] = copyWith;
-
     Get.snackbar(
       'Success',
       'Todo updated successfully',

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:theeco/app/modules/home/todo_request_model.dart';
 import 'package:theeco/app/shared/widgets/shimmer_box.dart';
 import 'package:theeco/app/shared/widgets/shimmer_lines.dart';
 
@@ -13,10 +14,23 @@ class HomeView extends GetView<HomeController> {
       appBar: AppBar(
         title: const Text('HomeView'),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () {
+              TodoRequestModel todoRequestModel = TodoRequestModel(
+                userId: 1,
+                completed: true,
+                title: 'New Todo',
+                description: 'New Todo Description',
+              );
+              controller.postHomeData(todoRequestModel);
+            },
+          ),
+        ],
       ),
       body: Obx(
         () => ListView.builder(
-          controller: controller.scrollController,
           itemCount: controller.isLoading.value ? 30 : controller.todos.length,
           itemBuilder: (context, index) {
             return ListTile(
@@ -43,6 +57,10 @@ class HomeView extends GetView<HomeController> {
             );
           },
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: controller.getHomeDataTow,
+        child: const Icon(Icons.refresh),
       ),
     );
   }
