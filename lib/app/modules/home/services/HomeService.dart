@@ -1,6 +1,6 @@
 import 'package:either_dart/src/either.dart';
-import 'package:theeco/app/modules/home/todo_request_model.dart';
-import 'package:theeco/app/modules/home/todos_model.dart';
+import 'package:theeco/app/modules/home/models/todo_request_model.dart';
+import 'package:theeco/app/modules/home/models/todos_model.dart';
 import 'package:theeco/app/shared/errors/failure.dart';
 import 'package:theeco/app/shared/utilities/thePrettyJson.dart';
 import 'package:theeco/app/shared/utilities/the_dio.dart';

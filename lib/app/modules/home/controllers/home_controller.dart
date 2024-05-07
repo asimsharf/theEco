@@ -1,16 +1,16 @@
 import 'package:get/get.dart';
-import 'package:theeco/app/modules/home/todo_request_model.dart';
+import 'package:theeco/app/modules/home/models/todo_request_model.dart';
+import 'package:theeco/app/modules/home/repositories/HomeRepository.dart';
 import 'package:theeco/app/shared/utilities/the_dio.dart';
 
 import '../interfaces/homeInterface.dart';
-import '../services/HomeService.dart';
-import '../todos_model.dart';
+import '../models/todos_model.dart';
 
 class HomeController extends GetxController {
   HomeInterface homeInterface;
 
   HomeController({required this.homeInterface}) {
-    homeInterface = HomeService();
+    homeInterface = HomeRepository();
   }
 
   final RxBool isLoading = true.obs;

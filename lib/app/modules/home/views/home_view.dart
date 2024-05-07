@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:theeco/app/modules/home/todo_request_model.dart';
 import 'package:theeco/app/shared/widgets/shimmer_box.dart';
 import 'package:theeco/app/shared/widgets/shimmer_lines.dart';
 
 import '../controllers/home_controller.dart';
+import '../models/todo_request_model.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
