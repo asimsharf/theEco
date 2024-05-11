@@ -37,6 +37,14 @@ class HomeService implements HomeInterface {
                 stackTrace: StackTrace.current,
               ),
             );
+          } else if (value.statusCode == 401) {
+            return Left(
+              NotFoundFailure(
+                message: "${value.statusMessage!} ${value.statusCode}",
+                stackTrace: StackTrace.current,
+                errorCode: value.statusCode,
+              ),
+            );
           } else {
             return Right(
               value.data

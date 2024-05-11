@@ -1,8 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:theeco/app/modules/home/models/todo_request_model.dart';
 import 'package:theeco/app/modules/home/repositories/HomeRepository.dart';
 import 'package:theeco/app/shared/utilities/the_dio.dart';
 
+import '../../../shared/errors/failure.dart';
 import '../interfaces/homeInterface.dart';
 import '../models/todos_model.dart';
 
@@ -32,6 +34,7 @@ class HomeController extends GetxController {
   Future<void> getHomeData() async {
     try {
       isLoading.value = true;
+
       final response = await homeInterface.getHomeData();
       if (response.isEmpty) {
         Get.snackbar(
@@ -55,17 +58,53 @@ class HomeController extends GetxController {
   Future<void> getHomeDataTow() async {
     try {
       isLoading.value = true;
-      final response = await homeInterface.getHomeDataTow();
-      if (response.isLeft) {
-        Get.snackbar(
-          'Error',
-          response.left.message,
-          snackPosition: SnackPosition.TOP,
+
+      await homeInterface.getHomeDataTow().then((value) {
+        value.fold(
+          (left) {
+            if (left.stackTrace.toString().contains('401')) {
+              Get.snackbar(
+                'Error',
+                left.message,
+                snackPosition: SnackPosition.TOP,
+              );
+            } else if (left is NotFoundFailure) {
+              Get.snackbar(
+                'Error',
+                left.message,
+                snackPosition: SnackPosition.TOP,
+              );
+            } else {
+              Get.snackbar(
+                'Error',
+                'Failed to load data from server',
+                snackPosition: SnackPosition.TOP,
+              );
+            }
+          },
+          (right) {
+            if (right.isEmpty) {
+              Get.snackbar(
+                'Error',
+                'Failed to load data from server',
+                snackPosition: SnackPosition.TOP,
+              );
+            } else {
+              Get.snackbar(
+                'Successfully',
+                'Successfully load data from server',
+                snackPosition: SnackPosition.TOP,
+                backgroundColor: Colors.green,
+                colorText: Colors.white,
+                titleText: const Text("Successfully..."),
+                duration: const Duration(milliseconds: 700),
+              );
+              todos.assignAll(right);
+            }
+          },
         );
-      } else {
-        todos.assignAll(response.right);
         isLoading.value = false;
-      }
+      });
     } catch (e) {
       Get.snackbar(
         'Error',

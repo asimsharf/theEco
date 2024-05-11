@@ -43,6 +43,16 @@ class TodosModel {
     );
   }
 
+  // emptyTodosModel
+  static TodosModel empty() {
+    return TodosModel(
+      userId: 0,
+      id: 0,
+      title: '',
+      completed: false,
+    );
+  }
+
   static List<TodosModel> fromJsonList(data) {
     List<TodosModel> todosList = [];
     for (var item in data) {
