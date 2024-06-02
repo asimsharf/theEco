@@ -16,12 +16,21 @@ dependencies:
     git:
       url: https://github.com/asimsharf/pretty_json.git
   either_dart: ^1.0.0
+  mockito: ^5.4.4
+  dropdown_button2: ^2.3.9
+
 
 dev_dependencies: 
   flutter_lints: ^3.0.0
   flutter_test: 
     sdk: flutter
+  build_runner: ^2.4.9
 
 flutter: 
   uses-material-design: true
+
+  fonts:
+    - family: din_next_tl_arabic_regular
+      fonts:
+        - asset: assets/fonts/din_next_tl_arabic_regular.ttf
 

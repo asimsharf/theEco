@@ -142,7 +142,7 @@ class HomeController extends GetxController {
     }
   }
 
-  updateTodo(TodosModel copyWith) {
+  Future<void> updateTodo(TodosModel copyWith) async {
     final index = todos.indexWhere((element) => element.id == copyWith.id);
     todos[index] = copyWith;
     Get.snackbar(
