@@ -1,7 +1,7 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 
-class CustomDropdownButton extends StatelessWidget {
+class CustomDropdownButton<T> extends StatelessWidget {
   const CustomDropdownButton({
     required this.hint,
     required this.value,
@@ -33,9 +33,9 @@ class CustomDropdownButton extends StatelessWidget {
     super.key,
   });
   final String hint;
-  final String? value;
-  final List<String> dropdownItems;
-  final ValueChanged<String?>? onChanged;
+  final T? value;
+  final List<T> dropdownItems;
+  final ValueChanged<T?>? onChanged;
   final DropdownButtonBuilder? selectedItemBuilder;
   final Alignment? hintAlignment;
   final Alignment? valueAlignment;
@@ -61,7 +61,7 @@ class CustomDropdownButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonHideUnderline(
-      child: DropdownButton2<String>(
+      child: DropdownButton2<T>(
         isExpanded: true,
         hint: Container(
           alignment: hintAlignment,
@@ -77,22 +77,7 @@ class CustomDropdownButton extends StatelessWidget {
         ),
         value: value,
         items: dropdownItems
-            .map(
-              (String item) => DropdownMenuItem<String>(
-                value: item,
-                child: Container(
-                  alignment: valueAlignment,
-                  child: Text(
-                    item,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                    style: const TextStyle(
-                      fontSize: 14,
-                    ),
-                  ),
-                ),
-              ),
-            )
+            .map((e) => DropdownMenuItem(value: e, child: Text(e.toString())))
             .toList(),
         onChanged: onChanged,
         selectedItemBuilder: selectedItemBuilder,
