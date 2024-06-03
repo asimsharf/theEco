@@ -17,6 +17,18 @@ class HomeController extends GetxController {
 
   final RxBool isLoading = true.obs;
   final todos = List<TodosModel>.empty(growable: true).obs;
+  final selectedTodo = TodosModel.empty().obs;
+
+  set setSelectedTodo(TodosModel value) {
+    selectedTodo.value = value;
+  }
+
+  get getSelectedTodo {
+    if (selectedTodo.value.id == 0) {
+      return null;
+    }
+    return selectedTodo.value;
+  }
 
   @override
   void onInit() {
@@ -33,6 +45,7 @@ class HomeController extends GetxController {
 
   Future<void> getHomeData() async {
     try {
+      setSelectedTodo = TodosModel.empty();
       isLoading.value = true;
 
       final response = await homeInterface.getHomeData();
@@ -57,6 +70,7 @@ class HomeController extends GetxController {
 
   Future<void> getHomeDataTow() async {
     try {
+      setSelectedTodo = TodosModel.empty();
       isLoading.value = true;
 
       await homeInterface.getHomeDataTow().then((value) {

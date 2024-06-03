@@ -13,6 +13,15 @@ void main() {
         useMaterial3: true,
         primarySwatch: Colors.blue,
         fontFamily: 'din_next_tl_arabic_regular',
+        scaffoldBackgroundColor: const Color(0xFFFFFFFF),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFFFFFFFF),
+          elevation: 0,
+          iconTheme: IconThemeData(
+            color: Color(0xFF000000),
+          ),
+          scrolledUnderElevation: 0,
+        ),
       ),
     ),
   );

@@ -1,12 +1,13 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 
-class CustomDropdownButton<T> extends StatelessWidget {
-  const CustomDropdownButton({
+class SharedCustomDropdown<T> extends StatelessWidget {
+  const SharedCustomDropdown({
     required this.hint,
     required this.value,
     required this.dropdownItems,
     required this.onChanged,
+    required this.getDisplayText,
     this.selectedItemBuilder,
     this.hintAlignment,
     this.valueAlignment,
@@ -32,10 +33,12 @@ class CustomDropdownButton<T> extends StatelessWidget {
     this.offset = Offset.zero,
     super.key,
   });
+
   final String hint;
   final T? value;
   final List<T> dropdownItems;
   final ValueChanged<T?>? onChanged;
+  final String Function(T) getDisplayText;
   final DropdownButtonBuilder? selectedItemBuilder;
   final Alignment? hintAlignment;
   final Alignment? valueAlignment;
@@ -63,6 +66,21 @@ class CustomDropdownButton<T> extends StatelessWidget {
     return DropdownButtonHideUnderline(
       child: DropdownButton2<T>(
         isExpanded: true,
+        barrierLabel: hint,
+        barrierColor: Colors.black.withOpacity(0.1),
+        barrierDismissible: true,
+        disabledHint: Container(
+          alignment: valueAlignment,
+          child: Text(
+            hint,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+            style: TextStyle(
+              fontSize: 14,
+              color: Theme.of(context).hintColor,
+            ),
+          ),
+        ),
         hint: Container(
           alignment: hintAlignment,
           child: Text(
@@ -76,22 +94,25 @@ class CustomDropdownButton<T> extends StatelessWidget {
           ),
         ),
         value: value,
-        items: dropdownItems
-            .map((e) => DropdownMenuItem(value: e, child: Text(e.toString())))
-            .toList(),
+        items: dropdownItems.map((e) {
+          return DropdownMenuItem(
+            value: e,
+            child: Text(
+              getDisplayText(e),
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          );
+        }).toList(),
         onChanged: onChanged,
         selectedItemBuilder: selectedItemBuilder,
         buttonStyleData: ButtonStyleData(
-          height: buttonHeight ?? 40,
-          width: buttonWidth ?? 140,
-          padding: buttonPadding ?? const EdgeInsets.only(left: 14, right: 14),
-          decoration: buttonDecoration ??
-              BoxDecoration(
-                borderRadius: BorderRadius.circular(14),
-                border: Border.all(
-                  color: Colors.black45,
-                ),
-              ),
+          height: buttonHeight,
+          width: buttonWidth,
+          padding: buttonPadding,
+          decoration: buttonDecoration,
           elevation: buttonElevation,
         ),
         iconStyleData: IconStyleData(
@@ -101,8 +122,8 @@ class CustomDropdownButton<T> extends StatelessWidget {
           iconDisabledColor: iconDisabledColor,
         ),
         dropdownStyleData: DropdownStyleData(
-          maxHeight: dropdownHeight ?? 200,
-          width: dropdownWidth ?? 140,
+          maxHeight: dropdownHeight,
+          width: dropdownWidth,
           padding: dropdownPadding,
           decoration: dropdownDecoration ??
               BoxDecoration(
@@ -113,16 +134,16 @@ class CustomDropdownButton<T> extends StatelessWidget {
           scrollbarTheme: ScrollbarThemeData(
             radius: scrollbarRadius ?? const Radius.circular(40),
             thickness: scrollbarThickness != null
-                ? WidgetStateProperty.all<double>(scrollbarThickness!)
+                ? MaterialStateProperty.all<double>(scrollbarThickness!)
                 : null,
             thumbVisibility: scrollbarAlwaysShow != null
-                ? WidgetStateProperty.all<bool>(scrollbarAlwaysShow!)
+                ? MaterialStateProperty.all<bool>(scrollbarAlwaysShow!)
                 : null,
           ),
         ),
         menuItemStyleData: MenuItemStyleData(
           height: itemHeight ?? 40,
-          padding: itemPadding ?? const EdgeInsets.only(left: 14, right: 14),
+          padding: itemPadding,
         ),
       ),
     );
