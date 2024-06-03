@@ -15,21 +15,6 @@ class HomeController extends GetxController {
     homeInterface = HomeRepository();
   }
 
-  final RxBool isLoading = true.obs;
-  final todos = List<TodosModel>.empty(growable: true).obs;
-  final selectedTodo = TodosModel.empty().obs;
-
-  set setSelectedTodo(TodosModel value) {
-    selectedTodo.value = value;
-  }
-
-  get getSelectedTodo {
-    if (selectedTodo.value.id == 0) {
-      return null;
-    }
-    return selectedTodo.value;
-  }
-
   @override
   void onInit() {
     super.onInit();
@@ -43,6 +28,32 @@ class HomeController extends GetxController {
     getHomeData();
   }
 
+  final RxBool isLoading = true.obs;
+
+  /// Start todos list
+  final todos = List<TodosModel>.empty(growable: true).obs;
+  get itemCount {
+    return isLoading.value ? 30 : todos.length;
+  }
+
+  /// End todos list
+
+  /// Start selectedTodo
+  final selectedTodo = TodosModel.empty().obs;
+  set setSelectedTodo(TodosModel value) {
+    selectedTodo.value = value;
+  }
+
+  get getSelectedTodo {
+    if (selectedTodo.value.id == 0) {
+      return null;
+    }
+    return selectedTodo.value;
+  }
+
+  /// End selectedTodo
+
+  /// Start API Calls
   Future<void> getHomeData() async {
     try {
       setSelectedTodo = TodosModel.empty();
@@ -165,4 +176,6 @@ class HomeController extends GetxController {
       snackPosition: SnackPosition.TOP,
     );
   }
+
+  /// End API Calls
 }

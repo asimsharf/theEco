@@ -61,7 +61,10 @@ class HomeView extends GetView<HomeController> {
                   ),
                 ),
                 buttonElevation: 0,
-                icon: const Icon(Icons.arrow_drop_down),
+                icon: const Icon(
+                  Icons.keyboard_arrow_down_rounded,
+                  color: Color(0xFF004D41),
+                ),
                 iconSize: 24,
                 iconEnabledColor: Colors.black45,
                 iconDisabledColor: Colors.black45,
@@ -88,8 +91,7 @@ class HomeView extends GetView<HomeController> {
             ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount:
-                  controller.isLoading.value ? 30 : controller.todos.length,
+              itemCount: controller.itemCount,
               itemBuilder: (context, index) {
                 return ListTile(
                   title: controller.isLoading.value
