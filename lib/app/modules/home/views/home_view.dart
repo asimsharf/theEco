@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:theeco/app/modules/home/models/todos_model.dart';
+import 'package:theeco/app/modules/home/widgets/the_cupertino_button.dart';
 import 'package:theeco/app/shared/utilities/colors/the_colors.dart';
 import 'package:theeco/app/shared/utilities/styles/the_styles.dart';
 import 'package:theeco/app/shared/widgets/shimmer_box.dart';
@@ -23,7 +24,10 @@ class HomeView extends GetView<HomeController> {
         centerTitle: true,
         actions: [
           IconButton(
-            icon: const Icon(Icons.add),
+            icon: const Icon(
+              Icons.add,
+              color: TheColors.icon,
+            ),
             onPressed: () {
               TodoRequestModel todoRequestModel = TodoRequestModel(
                 userId: 1,
@@ -33,19 +37,28 @@ class HomeView extends GetView<HomeController> {
               );
               controller.postHomeData(todoRequestModel);
             },
-            style: TheStyles.buttonStyle.copyWith(
-              backgroundColor: WidgetStateProperty.all(TheColors.primary),
-            ),
+            style: TheStyles.buttonStyle,
           ),
           IconButton(
-            icon: const Icon(Icons.token),
+            icon: const Icon(
+              Icons.token,
+              color: TheColors.icon,
+            ),
             onPressed: () {},
+            style: TheStyles.buttonStyle,
           ),
         ],
       ),
       body: Obx(
         () => ListView(
           children: [
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: TheCupertinoButton(
+                text: 'Get Todos',
+                onPressed: controller.getHomeData,
+              ),
+            ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               width: double.infinity,

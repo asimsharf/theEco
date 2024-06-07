@@ -1,15 +1,38 @@
+// Main color
+// 0xFF004D41, name: Dark Teal
+// 0xFF877334, name: Dark Goldenrod
+// 0xFFABD02B, name: Pear Green
+// 0xFFEEF6D5, name: Pale Spring Bud
+// 0xFF00AE9A, name: Persian Green
+
 import 'package:flutter/material.dart';
 
 class TheColors {
-  static const Color primary = Color(0xFF3F51B5);
-  static const Color primaryDark = Color(0xFF303F9F);
-  static const Color primaryLight = Color(0xFFC5CAE9);
-  static const Color accent = Color(0xFF00BCD4);
-  static const Color text = Color(0xFF212121);
-  static const Color textLight = Color(0xFF757575);
-  static const Color textDark = Color(0xFF000000);
-  static const Color background = Color(0xFFE0E0E0);
-  static const Color backgroundDark = Color(0xFFBDBDBD);
-  static const Color backgroundLight = Color(0xFFFFFFFF);
-  static const Color divider = Color(0xFFBDBDBD);
+  static const int darkTeal = 0xFF004D41;
+  static const int darkGoldenrod = 0xFF877334;
+  static const int pearGreen = 0xFFABD02B;
+  static const int paleSpringBud = 0xFFEEF6D5;
+  static const int persianGreen = 0xFF00AE9A;
+  static const int whites = 0xFFFFFFFF;
+
+  static const int primary = 0xFF00AE9A;
+  static const int secondary = 0xFF004D41;
+  static const int grayscale = 0xFFEEF6D5;
+
+  static const Color activeBlue = Color(darkTeal);
+  static const Color inactiveGray = Color(darkGoldenrod);
+  static const Color icon = Color(pearGreen);
+  static const Color text = Color(paleSpringBud);
+  static const Color textLight = Color(persianGreen);
+
+  static const Color white = Color(whites);
+
+  static const Color link = Color(primary);
+  static const Color error = Color(secondary);
+  static const Color success = Color(secondary);
+  static const Color warning = Color(secondary);
+  static const Color focus = Color(secondary);
+  static const Color disabled = Color(secondary);
+  static const Color background = Color(secondary);
+  static const Color border = Color(secondary);
 }

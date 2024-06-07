@@ -28,15 +28,17 @@ class TheStyles {
     color: TheColors.textLight,
     fontSize: 12,
   );
+
+  /// Done
   static const TextStyle button = TextStyle(
     fontFamily: fromFamily,
-    color: TheColors.textLight,
-    fontSize: 14,
-    fontWeight: FontWeight.bold,
+    color: TheColors.white,
+    fontSize: 16,
+    fontWeight: FontWeight.w700,
   );
   static const TextStyle link = TextStyle(
     fontFamily: fromFamily,
-    color: TheColors.primary,
+    color: TheColors.link,
     fontSize: 14,
     fontWeight: FontWeight.bold,
   );
@@ -185,10 +187,10 @@ class TheStyles {
   );
 
   static const AppBarTheme appBarTheme = AppBarTheme(
-    backgroundColor: TheColors.backgroundLight,
+    backgroundColor: TheColors.white,
     elevation: 0,
     iconTheme: IconThemeData(
-      color: TheColors.textDark,
+      color: TheColors.icon,
     ),
     scrolledUnderElevation: 0,
   );
@@ -202,11 +204,11 @@ class TheStyles {
       color: TheColors.textLight,
     ),
     errorStyle: TextStyle(
-      color: TheColors.textDark,
+      color: TheColors.error,
     ),
     focusedBorder: UnderlineInputBorder(
       borderSide: BorderSide(
-        color: TheColors.primary,
+        color: TheColors.focus,
       ),
     ),
     enabledBorder: UnderlineInputBorder(
@@ -216,22 +218,22 @@ class TheStyles {
     ),
     errorBorder: UnderlineInputBorder(
       borderSide: BorderSide(
-        color: TheColors.textDark,
+        color: TheColors.text,
       ),
     ),
     focusedErrorBorder: UnderlineInputBorder(
       borderSide: BorderSide(
-        color: TheColors.textDark,
+        color: TheColors.text,
       ),
     ),
   );
 
   // Button Styles
   static ButtonStyle buttonStyle = ButtonStyle(
-    backgroundColor: WidgetStateProperty.all<Color>(TheColors.primary),
+    backgroundColor: WidgetStateProperty.all<Color>(TheColors.activeBlue),
     foregroundColor: WidgetStateProperty.all<Color>(TheColors.textLight),
-    overlayColor: WidgetStateProperty.all<Color>(TheColors.primaryDark),
-    shadowColor: WidgetStateProperty.all<Color>(TheColors.primaryLight),
+    overlayColor: WidgetStateProperty.all<Color>(TheColors.textLight),
+    shadowColor: WidgetStateProperty.all<Color>(TheColors.textLight),
     elevation: WidgetStateProperty.all<double>(4),
     textStyle: WidgetStateProperty.all<TextStyle>(TheStyles.button),
     shape: WidgetStateProperty.all<OutlinedBorder>(
@@ -244,9 +246,9 @@ class TheStyles {
   // Button Styles
   static ButtonStyle linkStyle = ButtonStyle(
     backgroundColor: WidgetStateProperty.all<Color>(Colors.transparent),
-    foregroundColor: WidgetStateProperty.all<Color>(TheColors.primary),
-    overlayColor: WidgetStateProperty.all<Color>(TheColors.primaryLight),
-    shadowColor: WidgetStateProperty.all<Color>(TheColors.primaryDark),
+    foregroundColor: WidgetStateProperty.all<Color>(TheColors.activeBlue),
+    overlayColor: WidgetStateProperty.all<Color>(TheColors.textLight),
+    shadowColor: WidgetStateProperty.all<Color>(TheColors.textLight),
     elevation: WidgetStateProperty.all<double>(0),
     textStyle: WidgetStateProperty.all<TextStyle>(TheStyles.link),
     shape: WidgetStateProperty.all<OutlinedBorder>(
@@ -259,9 +261,9 @@ class TheStyles {
   // Button Styles
   static ButtonStyle linkStyleDark = ButtonStyle(
     backgroundColor: WidgetStateProperty.all<Color>(Colors.transparent),
-    foregroundColor: WidgetStateProperty.all<Color>(TheColors.primary),
-    overlayColor: WidgetStateProperty.all<Color>(TheColors.primaryLight),
-    shadowColor: WidgetStateProperty.all<Color>(TheColors.primaryDark),
+    foregroundColor: WidgetStateProperty.all<Color>(TheColors.activeBlue),
+    overlayColor: WidgetStateProperty.all<Color>(TheColors.textLight),
+    shadowColor: WidgetStateProperty.all<Color>(TheColors.textLight),
     elevation: WidgetStateProperty.all<double>(0),
     textStyle: WidgetStateProperty.all<TextStyle>(TheStyles.link),
     shape: WidgetStateProperty.all<OutlinedBorder>(
@@ -274,9 +276,9 @@ class TheStyles {
   // Button Styles
   static ButtonStyle linkStyleLight = ButtonStyle(
     backgroundColor: WidgetStateProperty.all<Color>(Colors.transparent),
-    foregroundColor: WidgetStateProperty.all<Color>(TheColors.primary),
-    overlayColor: WidgetStateProperty.all<Color>(TheColors.primaryLight),
-    shadowColor: WidgetStateProperty.all<Color>(TheColors.primaryDark),
+    foregroundColor: WidgetStateProperty.all<Color>(TheColors.activeBlue),
+    overlayColor: WidgetStateProperty.all<Color>(TheColors.textLight),
+    shadowColor: WidgetStateProperty.all<Color>(TheColors.textLight),
     elevation: WidgetStateProperty.all<double>(0),
     textStyle: WidgetStateProperty.all<TextStyle>(TheStyles.link),
     shape: WidgetStateProperty.all<OutlinedBorder>(
