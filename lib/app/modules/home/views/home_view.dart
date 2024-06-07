@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:theeco/app/modules/home/models/todos_model.dart';
+import 'package:theeco/app/shared/utilities/colors/the_colors.dart';
+import 'package:theeco/app/shared/utilities/styles/the_styles.dart';
 import 'package:theeco/app/shared/widgets/shimmer_box.dart';
 import 'package:theeco/app/shared/widgets/shimmer_lines.dart';
 
@@ -14,7 +16,10 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('HomeView'),
+        title: const Text(
+          'HomeView',
+          style: TheStyles.title,
+        ),
         centerTitle: true,
         actions: [
           IconButton(
@@ -28,6 +33,9 @@ class HomeView extends GetView<HomeController> {
               );
               controller.postHomeData(todoRequestModel);
             },
+            style: TheStyles.buttonStyle.copyWith(
+              backgroundColor: WidgetStateProperty.all(TheColors.primary),
+            ),
           ),
           IconButton(
             icon: const Icon(Icons.token),
