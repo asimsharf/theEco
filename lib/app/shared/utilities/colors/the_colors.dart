@@ -1,13 +1,22 @@
 // Main color
 // 0xFF004D41, name: Dark Teal
-// 0xFF877334, name: Dark Goldenrod
-// 0xFFABD02B, name: Pear Green
-// 0xFFEEF6D5, name: Pale Spring Bud
 // 0xFF00AE9A, name: Persian Green
+// 0xFFABD02B, name: Pear Green
+// 0xFF877334, name: Dark Goldenrod
+// 0xFFEEF6D5, name: Pale Spring Bud
+// 0xFFD94747, name: Cinnabar
 
 import 'package:flutter/material.dart';
 
 class TheColors {
+  static const Color mainDarkTeal =
+      Color(0xFF004D41); // Buttons text, Icons Color,
+  static const Color mainPersianGreen = Color(0xFF00AE9A);
+  static const Color mainPearGreen = Color(0xFFABD02B); // Buttons,
+  static const Color mainDarkGoldenrod = Color(0xFF877334);
+  static const Color mainPaleSpringBud = Color(0xFFEEF6D5); // Icons Background,
+  static const Color mainCinnabar = Color(0xFFD94747);
+
   static const int darkTeal = 0xFF004D41;
   static const int darkGoldenrod = 0xFF877334;
   static const int pearGreen = 0xFFABD02B;
