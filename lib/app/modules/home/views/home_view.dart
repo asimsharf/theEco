@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:theeco/app/modules/home/models/todos_model.dart';
+import 'package:theeco/app/modules/home/utils/home_language_keys.dart';
 import 'package:theeco/app/modules/home/widgets/the_cupertino_button.dart';
 import 'package:theeco/app/shared/utilities/colors/the_colors.dart';
 import 'package:theeco/app/shared/utilities/styles/the_styles.dart';
@@ -18,7 +19,7 @@ class HomeView extends GetView<HomeController> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'HomeView',
+          HomeLanguageKeys.homeScreen,
           style: TheStyles.title,
         ),
         centerTitle: true,
