@@ -9,8 +9,7 @@
 import 'package:flutter/material.dart';
 
 class TheColors {
-  static const Color mainDarkTeal =
-      Color(0xFF004D41); // Buttons text, Icons Color,
+  static const Color mainDarkTeal = Color(0xFF004D41);
   static const Color mainPersianGreen = Color(0xFF00AE9A);
   static const Color mainPearGreen = Color(0xFFABD02B); // Buttons,
   static const Color mainDarkGoldenrod = Color(0xFF877334);
