@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:table_calendar/table_calendar.dart';
 import 'package:theeco/app/modules/home/models/todo_request_model.dart';
 import 'package:theeco/app/modules/home/repositories/HomeRepository.dart';
 import 'package:theeco/app/shared/utilities/the_dio.dart';
@@ -178,4 +179,7 @@ class HomeController extends GetxController {
   }
 
   /// End API Calls
+
+  var format = CalendarFormat.month.obs;
+  var selectedDay = Rx<DateTime>(DateTime.now());
 }
