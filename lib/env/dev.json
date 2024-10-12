@@ -1,0 +1,8 @@
+{
+  "baseUrl": "https://api.example.com",
+  "apiKey": "1234567890",
+  "timeout": 3000,
+  "maxRetry": 3,
+  "debug": false,
+  "logLevel": "info"
+}

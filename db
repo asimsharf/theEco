@@ -1,0 +1,128 @@
+Tables and Relationships
+USERS
+id (PK)
+name
+email
+password
+phone
+DOMAINS
+id (PK)
+name
+COUNTRIES
+id (PK)
+name
+CITIES
+id (PK)
+name
+country_id (FK to COUNTRIES.id)
+RESTAURANTS
+id (PK)
+name
+address
+phone
+city_id (FK to CITIES.id)
+domain_id (FK to DOMAINS.id)
+THEMES
+id (PK)
+name
+DELIVERIES
+id (PK)
+order_id (FK to ORDERS.id)
+user_id (FK to USERS.id)
+delivery_time
+AVAILABLE_LANGUAGES
+id (PK)
+language_code
+language_name
+TABLES
+id (PK)
+restaurant_id (FK to RESTAURANTS.id)
+number
+capacity
+CATEGORIES
+id (PK)
+name
+restaurant_id (FK to RESTAURANTS.id)
+ITEMS
+id (PK)
+name
+description
+price
+category_id (FK to CATEGORIES.id)
+ALLERGENS
+id (PK)
+name
+TAGS
+id (PK)
+name
+DAYS
+id (PK)
+name
+MODIFIER_ITEMS
+id (PK)
+name
+price
+modifier_group_id (FK to MODIFIER_GROUPS.id)
+MODIFIER_GROUPS
+id (PK)
+name
+DISCOUNT
+id (PK)
+code
+amount
+FOOD_SOURCES
+id (PK)
+name
+QRCODE
+id (PK)
+code
+table_id (FK to TABLES.id)
+REVIEWS
+id (PK)
+restaurant_id (FK to RESTAURANTS.id)
+user_id (FK to USERS.id)
+review_text
+rating
+Relationships
+USERS to DELIVERIES
+
+One-to-Many: A user can have multiple deliveries.
+COUNTRIES to CITIES
+
+One-to-Many: A country can have multiple cities.
+CITIES to RESTAURANTS
+
+One-to-Many: A city can have multiple restaurants.
+DOMAINS to RESTAURANTS
+
+One-to-Many: A domain can have multiple restaurants.
+RESTAURANTS to TABLES
+
+One-to-Many: A restaurant can have multiple tables.
+RESTAURANTS to CATEGORIES
+
+One-to-Many: A restaurant can have multiple categories.
+CATEGORIES to ITEMS
+
+One-to-Many: A category can have multiple items.
+ITEMS to TAGS
+
+Many-to-Many: An item can have multiple tags, and a tag can belong to multiple items. (Requires a junction table, not shown here.)
+ITEMS to ALLERGENS
+
+Many-to-Many: An item can have multiple allergens, and an allergen can belong to multiple items. (Requires a junction table, not shown here.)
+ITEMS to MODIFIER_ITEMS
+
+Many-to-Many: An item can have multiple modifier items, and a modifier item can belong to multiple items. (Requires a junction table, not shown here.)
+MODIFIER_GROUPS to MODIFIER_ITEMS
+
+One-to-Many: A modifier group can have multiple modifier items.
+TABLES to QRCODE
+
+One-to-One: A table can have one QR code.
+USERS to REVIEWS
+
+One-to-Many: A user can write multiple reviews.
+RESTAURANTS to REVIEWS
+
+One-to-Many: A restaurant can receive multiple reviews.
