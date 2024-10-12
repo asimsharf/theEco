@@ -2,7 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MyController extends GetxController {
-  var items = <String>[].obs; // Reactive list of items
+  var items = <String>[
+    'Item 1',
+    'Item 2',
+    'Item 3',
+    'Item 4',
+    'Item 5',
+    'Item 6',
+    'Item 7',
+    'Item 8',
+    'Item 9',
+    'Item 10',
+  ].obs; // Reactive list// of items
 
   void addItem() {
     items.add('Item ${items.length + 1}');
@@ -33,7 +44,6 @@ class AutoHeightBottomSheetExample extends StatelessWidget {
     Get.bottomSheet(
       Obx(
         () => Container(
-          // Adjust height dynamically based on content
           constraints: BoxConstraints(
             maxHeight: MediaQuery.of(context).size.height *
                 0.8, // Max height for BottomSheet
@@ -54,8 +64,6 @@ class AutoHeightBottomSheetExample extends StatelessWidget {
               Flexible(
                 child: ListView.builder(
                   shrinkWrap: true,
-                  physics:
-                      const NeverScrollableScrollPhysics(), // Disable internal scrolling
                   itemCount: myController.items.length,
                   itemBuilder: (context, index) {
                     return ListTile(
@@ -75,7 +83,10 @@ class AutoHeightBottomSheetExample extends StatelessWidget {
         ),
       ),
       isScrollControlled: true, // Make BottomSheet scrollable
-    );
+    ).then((value) {
+      // Reset items list when BottomSheet is closed
+      myController.items.clear();
+    });
   }
 }
 
